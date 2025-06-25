@@ -340,9 +340,12 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top; /* shifts it from center to top */
+  transform: translateY(5%); /* push image slightly down */
   filter: grayscale(30%) contrast(110%);
   transition: var(--transition);
 }
+
 
 .image__border {
   position: absolute;
