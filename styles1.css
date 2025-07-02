@@ -313,6 +313,11 @@ a {
     min-height: 1.1em; /* Prevent layout shift during typing */
     display: inline-block; /* For typing cursor positioning */
     position: relative;
+    /* START OF NEW ADDITIONS FOR TYPING EFFECT SMOOTHNESS */
+    white-space: nowrap; /* Ensures text stays on one line */
+    min-width: max-content; /* Guarantees enough width for the longest phrase */
+    overflow: hidden; /* Hides any overflow before animation starts */
+    /* END OF NEW ADDITIONS */
 }
 
 .typing-cursor {
@@ -693,10 +698,11 @@ a {
     padding: 2.2rem; /* Slightly more padding */
     transition: var(--transition);
     border: 1px solid var(--border-color);
-    position: relative;
+    position: relative; /* Crucial for z-index context */
     overflow: hidden;
     backdrop-filter: blur(8px); /* Stronger blur */
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    z-index: 1; /* Ensures card itself is above general background elements */
 }
 
 .project__card::before {
@@ -731,12 +737,16 @@ a {
 
 .card__header {
     margin-bottom: 1.8rem;
+    position: relative; /* Crucial for z-index of its children */
+    z-index: 2; /* Ensures header content is above card's pseudo-elements */
 }
 
 .card__icons {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1.8rem;
+    position: relative; /* Crucial for z-index of its children */
+    z-index: 2; /* Ensures icons and links container is above card's pseudo-elements */
 }
 
 .card__icons i {
@@ -755,6 +765,8 @@ a {
     color: var(--text-color);
     transition: var(--transition);
     font-size: 1.2rem; /* Make link icons larger */
+    position: relative; /* Crucial for z-index context */
+    z-index: 2; /* Ensures the link itself is on top and clickable */
 }
 
 .card__link:hover {
@@ -983,6 +995,7 @@ a {
 }
 
 .particles {
+    pointer-events: none; /* Allow clicks to pass through */
     position: fixed;
     top: 0;
     left: 0;
@@ -1090,9 +1103,13 @@ a {
     }
 
     .navbar__link {
+        position: relative;
+        z-index: 10; /* Ensure links are above other elements */
         font-size: 1.2rem;
     }
     .navbar__resume {
+        position: relative;
+        z-index: 10; /* Ensure links are above other elements */
         margin-left: 0; /* Remove margin for mobile */
         margin-top: 1rem; /* Add some space if needed */
     }
